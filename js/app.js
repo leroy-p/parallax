@@ -1,6 +1,615 @@
-let style = { width: 1113, height: 783, top: 10, left: 10, "zIndex": 0 };
-let positions = [
-  { x: 0, y: 0, z: 0, opacity: 1 },
-  { x: 20, y: 60, z: 10, opacity: 0.5 }
+let speed = { move: 1000, opacity: 1000 };
+let maxScroll = 60;
+
+let data = [
+    {
+        img: "images/background.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 0 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/sylvia.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 5 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 400, y: 70, z: 300, opacity: 1 },
+
+            { x: 400, y: 70, z: 300, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/elouise.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 4 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 400, y: 160, z: 300, opacity: 1 },
+
+            { x: 400, y: 160, z: 300, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/richard.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 3 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: 0, y: 110, z: 300, opacity: 1 },
+
+            { x: 0, y: 110, z: 300, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: -400, y: 70, z: 300, opacity: 1 },
+
+            { x: -400, y: 70, z: 300, opacity: 1 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/john.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 2 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+
+            { x: 400, y: 100, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+
+            { x: 350, y: 10, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+
+            { x: 0, y: 50, z: 250, opacity: 0.5 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 60, z: 300, opacity: 1 },
+
+            { x: -400, y: 60, z: 300, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+
+            { x: -400, y: 0, z: 250, opacity: 0.5 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/bar.png",
+        style: { width: 1600, height: 900, top: 0, left: 0, "zIndex": 1 },
+        speed: { move: 1000, opacity: 1000 },
+        positions: [
+            { x: 0, y: 0, z: 0, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 400, y: 100, z: 250, opacity: 1 },
+
+            { x: 400, y: 100, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 350, y: 10, z: 250, opacity: 1 },
+
+            { x: 350, y: 10, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: 0, y: 50, z: 250, opacity: 1 },
+
+            { x: 0, y: 50, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: -400, y: 0, z: 250, opacity: 1 },
+
+            { x: -400, y: 0, z: 250, opacity: 1 },
+            { x: 0, y: 0, z: 0, opacity: 1 }
+        ]
+    },
+    {
+        img: "images/balloon.svg",
+        style: { width: 700, height: 350, top: 0, left: 0, "zIndex": 6 },
+        speed: { move: 1000, opacity: 200 },
+        positions: [
+          { x: 0, y: 0, z: 0, opacity: 0 },
+          { x: 800, y: 0, z: 0, opacity: 0, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 0 },
+
+          { x: 800, y: 0, z: 0, opacity: 0, text: 0 },
+          { x: 800, y: 0, z: 0, opacity: 0, text: 1 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 1 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 1 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 1 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 1 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 1 },
+
+          { x: 800, y: 0, z: 0, opacity: 0, text: 1 },
+          { x: 300, y: 50, z: 0, opacity: 0, text: 2 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 2 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 2 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 2 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 2 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 2 },
+
+          { x: 300, y: 50, z: 0, opacity: 0, text: 2 },
+          { x: 800, y: 0, z: 0, opacity: 0, text: 3 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 3 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 3 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 3 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 3 },
+          { x: 800, y: 0, z: 0, opacity: 1, text: 3 },
+
+          { x: 800, y: 0, z: 0, opacity: 0, text: 3 },
+          { x: 300, y: 50, z: 0, opacity: 0, text: 4 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 4 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 4 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 4 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 4 },
+          { x: 300, y: 50, z: 0, opacity: 1, text: 4 },
+
+          { x: 300, y: 50, z: 0, opacity: 0, text: 4 },
+          { x: 200, y: 50, z: 0, opacity: 0, text: 5 },
+          { x: 200, y: 50, z: 0, opacity: 1, text: 5 },
+          { x: 200, y: 50, z: 0, opacity: 1, text: 5 },
+          { x: 200, y: 50, z: 0, opacity: 1, text: 5 },
+          { x: 200, y: 50, z: 0, opacity: 1, text: 5 },
+          { x: 200, y: 50, z: 0, opacity: 1, text: 5 },
+
+          { x: 200, y: 50, z: 0, opacity: 0, text: 5 },
+          { x: 500, y: 20, z: 0, opacity: 0, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 1, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 1, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 1, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 1, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 1, text: 6 },
+
+          { x: 500, y: 20, z: 0, opacity: 0, text: 6 },
+          { x: 500, y: 20, z: 0, opacity: 0, text: 6 }
+        ]
+    },
+    {
+      img: "images/balloon-left-arrow.svg",
+      style: { width: 50, height: 50, top: 0, left: 0, "zIndex": 7 },
+      speed: { move: 1000, opacity: 200 },
+      positions: [
+        { x: 0, y: 287, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+        { x: 900, y: 287, z: 0, opacity: 1 },
+
+        { x: 900, y: 287, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 400, y: 337, z: 0, opacity: 0 },
+
+        { x: 400, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 300, y: 337, z: 0, opacity: 0 },
+
+        { x: 300, y: 337, z: 0, opacity: 0 },
+        { x: 600, y: 307, z: 0, opacity: 0 },
+        { x: 600, y: 307, z: 0, opacity: 1 },
+        { x: 600, y: 307, z: 0, opacity: 1 },
+        { x: 600, y: 307, z: 0, opacity: 1 },
+        { x: 600, y: 307, z: 0, opacity: 1 },
+        { x: 600, y: 307, z: 0, opacity: 1 },
+
+        { x: 600, y: 307, z: 0, opacity: 0 },
+        { x: 600, y: 307, z: 0, opacity: 0 }
+      ]
+  },
+  {
+    img: "images/balloon-right-arrow.svg",
+    style: { width: 50, height: 50, top: 0, left: 0, "zIndex": 7 },
+    speed: { move: 1000, opacity: 200 },
+    positions: [
+      { x: 0, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 900, y: 337, z: 0, opacity: 0 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+
+      { x: 900, y: 337, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+
+      { x: 1400, y: 287, z: 0, opacity: 0 },
+      { x: 900, y: 337, z: 0, opacity: 0 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+      { x: 900, y: 337, z: 0, opacity: 1 },
+
+      { x: 900, y: 337, z: 0, opacity: 0 },
+      { x: 800, y: 337, z: 0, opacity: 0 },
+      { x: 800, y: 337, z: 0, opacity: 1 },
+      { x: 800, y: 337, z: 0, opacity: 1 },
+      { x: 800, y: 337, z: 0, opacity: 1 },
+      { x: 800, y: 337, z: 0, opacity: 1 },
+      { x: 800, y: 337, z: 0, opacity: 1 },
+
+      { x: 800, y: 337, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+
+      { x: 1300, y: 307, z: 0, opacity: 0 },
+      { x: 1300, y: 307, z: 0, opacity: 0 }
+    ]
+  }
 ]
-let layout = new Layout("./carre.png", style, positions, null, 500);
+
+let texts = [
+  "Hello guys!",
+  "Have you read the newspaper?",
+  "No I have not.",
+  "There is a very interesting article.",
+  "What is it about?",
+  "I have read it, it is about new technologies.",
+  "Fascinating! I will read it later in the train."
+];
+
+let layouts = [];
+data.forEach(function(layout) {
+  let dialogs = layout.img === "images/balloon.svg" ? texts : null;
+  layouts.push(new Layout(layout.img, layout.style, layout.positions, dialogs, 500, layout.speed));
+});
+
+let sound = new Howl({
+  src: ["audio/ambiance.mp3"],
+  autoplay: true,
+  loop: true,
+  volume: 0.2
+});
+
+let game = new Game(maxScroll, speed, layouts);
